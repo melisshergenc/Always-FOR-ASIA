@@ -107,9 +107,17 @@ if(navigator.geolocation){
  navigator.geolocation.watchPosition(gotPos,posErr,{enableHighAccuracy:true,maximumAge:1000,timeout:15000});
 }else statusEl.textContent="Bu cihaz konum özelliğini desteklemiyor.";
 
+startBtn.addEventListener("click", async () => {
+ statusEl.textContent="Pusula başlatılıyor…";
+ await startCompass();
+});
+
 if(typeof DeviceOrientationEvent!=="undefined" && typeof DeviceOrientationEvent.requestPermission==="function"){
- startBtn.hidden=false; statusEl.textContent="Konuma izin ver, sonra pusulayı başlat.";
-}else startCompass();
+ startBtn.hidden=false;
+ statusEl.textContent="Konuma izin ver, sonra pusulayı başlat.";
+}else{
+ startCompass();
+}
 </script>
 </body>
 </html>
